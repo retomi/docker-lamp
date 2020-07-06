@@ -12,8 +12,8 @@ sed -i 's/export APACHE_RUN_USER=www-data/export APACHE_RUN_USER=www/g' /etc/apa
 /usr/sbin/service apache2 start
 sudo -u www -H sh -c "git config --global credential.helper store;
 cat > /var/www/.git-credentials <<EOF
-http://USER:PASSWORD@gitlab.nextup.cloud
-https://USER:PASSWORD@gitlab.nextup.cloud
+http://USER:PASSWORD@gitlab.XXX.XXX
+https://USER:PASSWORD@gitlab.XXX.XXX
 EOF
 "
 sh -c "echo 'alias ll=\"ls -la --color -I .DS_Store\"' >> /var/www/.bashrc"
