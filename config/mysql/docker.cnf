@@ -1,0 +1,10 @@
+[mysqld]
+max_allowed_packet=16M
+innodb_file_per_table
+ft_min_word_len=2
+key_buffer_size=16M
+thread_stack=192k
+thread_cache_size=8
+max_binlog_size=100M
+lower_case_table_names=2
+innodb_log_file_size=128MB

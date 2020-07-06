@@ -1,0 +1,4 @@
+.DS_Store
+*.log
+data/*
+config/vhosts/001-vhosts.conf
