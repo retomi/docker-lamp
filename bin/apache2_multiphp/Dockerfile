@@ -31,8 +31,8 @@ RUN apt-get install -y php7.2 php7.2-fpm libapache2-mod-php7.2 php7.2-mysql php7
 RUN apt-get install -y php7.4 php7.4-fpm libapache2-mod-php7.4 php7.4-mysql php7.4-curl php7.4-cli php7.4-json php7.4-opcache php7.4-readline php7.4-common php7.4-bcmath php7.4-gd php7.4-intl php7.4-mbstring php7.4-imap php7.4-interbase php7.4-ldap php7.4-pgsql php7.4-snmp php7.4-soap php7.4-tidy php7.4-xml php7.4-xsl php7.4-zip php7.4-gmp php7.4-sqlite3
 
 # php
-RUN apt update
-RUN apt-get -y install php-uploadprogress php-mailparse php-imagick php-psr php-memcached
+RUN apt-get update
+RUN apt-get -y install php-uploadprogress php-mailparse php-imagick php-psr php-memcached php-xdebug
 # RUN apt-get -y install php-xmlrpc
 # RUN apt-get -y install php-phalcon4
 
