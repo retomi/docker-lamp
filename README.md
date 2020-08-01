@@ -11,6 +11,9 @@ sudo apt update
 sudo apt install docker-ce
 sudo apt install docker-compose
 sudo usermod -aG docker $USER
+
+mkdir data
+sudo chmod o+w data
 ```
 
 Enable shared folder

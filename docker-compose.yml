@@ -6,7 +6,6 @@ services:
       context: ./bin/apache2_multiphp
       dockerfile: Dockerfile
     container_name: apache2-multiphp
-    restart: always
     ports:
       - "8080:80"
       - "8443:443"
@@ -33,7 +32,6 @@ services:
       context: "./bin/mariadb_10.4.12-bionic"
       dockerfile: Dockerfile
     container_name: mariadb-10.4.12
-    restart: always
     ports:
       - "3306:3306"
     volumes:
