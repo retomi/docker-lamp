@@ -8,3 +8,4 @@ thread_cache_size=8
 max_binlog_size=100M
 lower_case_table_names=2
 innodb_log_file_size=128MB
+innodb_strict_mode=0

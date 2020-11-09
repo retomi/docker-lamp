@@ -10,12 +10,12 @@ sed -i 's/export APACHE_RUN_USER=www-data/export APACHE_RUN_USER=www/g' /etc/apa
 /usr/sbin/service php7.2-fpm start
 /usr/sbin/service php7.4-fpm start
 /usr/sbin/service apache2 start
-sudo -u www -H sh -c "git config --global credential.helper store;
-cat > /var/www/.git-credentials <<EOF
+sudo -H sh -c "git config --global credential.helper store;
+cat > /root/.git-credentials <<EOF
 http://USER:PASSWORD@gitlab.XXX.XXX
 https://USER:PASSWORD@gitlab.XXX.XXX
 EOF
 "
-sh -c "echo 'alias ll=\"ls -la --color -I .DS_Store\"' >> /var/www/.bashrc"
-sh -c "chown www:www /var/www/.bashrc"
+#sh -c "echo 'alias ll=\"ls -la --color -I .DS_Store\"' >> /var/www/.bashrc"
+#sh -c "chown www:www /var/www/.bashrc"
 tail -f /dev/null

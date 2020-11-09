@@ -13,6 +13,7 @@ services:
     links:
       - mariadb-10.4.12
     volumes:
+      - ./config/.docker_bash_history:/root/.bash_history
       - "../:/var/www/html:delegated"
       - ./config/php-7.4/php-apache.ini:/etc/php/7.4/apache2/php.ini
       - ./config/php-7.4/php-cli.ini:/etc/php/7.4/cli/php.ini
@@ -38,7 +39,6 @@ services:
       - "3306:3306"
     volumes:
       - ./data:/var/lib/mysql
-      #- /docker/mariadb_10.4.12-bionic/data:/var/lib/mysql
       - ./config/mysql/docker.cnf:/etc/mysql/mariadb.conf.d/docker.cnf
       - ./logs/mysql:/var/log/mysql
     user: mysql

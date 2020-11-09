@@ -32,7 +32,8 @@ RUN apt-get install -y php7.4 php7.4-fpm libapache2-mod-php7.4 php7.4-mysql php7
 
 # php
 RUN apt-get update
-RUN apt-get -y install php-uploadprogress php-mailparse php-imagick php-psr php-memcached php-xdebug
+RUN apt-get -y install php-uploadprogress php-mailparse php-imagick php-psr php-memcached
+# RUN apt-get -y install php-xdebug
 # RUN apt-get -y install php-xmlrpc
 # RUN apt-get -y install php-phalcon4
 
@@ -46,8 +47,9 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 RUN usermod -d /var/www www
-COPY . /var/www
-COPY --chown=www:www . /var/www
+#COPY . /var/www
+#COPY --chown=www:www . /var/www
+
 RUN echo 'alias ll="ls -la --color"' >> ~/.bashrc
 #RUN chown www:www /var/www/
 
