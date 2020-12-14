@@ -13,8 +13,11 @@ services:
     links:
       - mariadb-10.4.12
     volumes:
-      - ./config/.docker_bash_history:/root/.bash_history
+      - ./config/.docker_bash_history:/root/.bash_history # file should exist before mounting
       - "../:/var/www/html:delegated"
+      - ./config/php-8.0/php-apache.ini:/etc/php/8.0/apache2/php.ini
+      - ./config/php-8.0/php-cli.ini:/etc/php/8.0/cli/php.ini
+      - ./config/php-8.0/php-fpm.ini:/etc/php/8.0/fpm/php.ini
       - ./config/php-7.4/php-apache.ini:/etc/php/7.4/apache2/php.ini
       - ./config/php-7.4/php-cli.ini:/etc/php/7.4/cli/php.ini
       - ./config/php-7.4/php-fpm.ini:/etc/php/7.4/fpm/php.ini

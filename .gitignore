@@ -1,3 +1,4 @@
 .DS_Store
 *.log
 data/*
+config/.docker_bash_history
