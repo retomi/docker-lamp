@@ -49,12 +49,9 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 # Add user for application (NO MACOS)
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
-RUN usermod -d /var/www www
-#COPY . /var/www
-#COPY --chown=www:www . /var/www
 
-RUN echo 'alias ll="ls -la --color"' >> ~/.bashrc
-#RUN chown www:www /var/www/
+RUN apt-get update
+RUN apt-get -y install openssh-server
 
 # clean up
 RUN apt-get -y autoclean && apt-get -y autoremove

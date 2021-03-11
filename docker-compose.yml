@@ -6,14 +6,16 @@ services:
       context: ./bin/apache2_multiphp
       dockerfile: Dockerfile
     container_name: apache2-multiphp
-    restart: always
+    #restart: always
     ports:
+      - "8022:22"
       - "8080:80"
       - "8443:443"
     links:
       - mariadb-10.4.12
     volumes:
-      - ./config/.docker_bash_history:/root/.bash_history # file should exist before mounting
+      - ./config/.root_history:/root/.bash_history # file should exist before mounting
+      - ./config/.www_history:/home/www/.bash_history # file should exist before mounting
       - "../:/var/www/html:delegated"
       - ./config/php-8.0/php-apache.ini:/etc/php/8.0/apache2/php.ini
       - ./config/php-8.0/php-cli.ini:/etc/php/8.0/cli/php.ini
@@ -37,7 +39,7 @@ services:
       context: "./bin/mariadb_10.4.12-bionic"
       dockerfile: Dockerfile
     container_name: mariadb-10.4.12
-    restart: always
+    #restart: always
     ports:
       - "3306:3306"
     volumes:
