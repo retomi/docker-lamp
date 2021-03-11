@@ -52,6 +52,9 @@ RUN useradd -u 1000 -ms /bin/bash -g www www
 
 RUN apt-get update
 RUN apt-get -y install openssh-server
+RUN apt-get -y install curl
+RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+RUN sudo apt-get install -y nodejs
 
 # clean up
 RUN apt-get -y autoclean && apt-get -y autoremove

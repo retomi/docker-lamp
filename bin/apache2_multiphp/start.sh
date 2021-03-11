@@ -15,6 +15,7 @@ sed -i 's/export APACHE_RUN_USER=www-data/export APACHE_RUN_USER=www/g' /etc/apa
 /usr/sbin/service apache2 start
 /usr/sbin/service ssh start
 sudo echo "www:www" | chpasswd
+sudo npm install --global gulp-cli
 echo 'alias ll="ls -la --color"' >> /home/www/.bashrc
 sudo -H sh -c "git config --global credential.helper store;
 cat > /root/.git-credentials <<EOF
