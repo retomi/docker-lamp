@@ -16,6 +16,7 @@ sed -i 's/export APACHE_RUN_USER=www-data/export APACHE_RUN_USER=www/g' /etc/apa
 /usr/sbin/service ssh start
 sudo echo "www:www" | chpasswd
 sudo npm install --global gulp-cli
+sudo npm install --global bower
 echo 'alias ll="ls -la --color"' >> /home/www/.bashrc
 cp /home/www/.oh-my-zsh/templates/zshrc.zsh-template /home/www/.zshrc
 echo 'alias ll="ls -la --color"' >> /home/www/.zshrc
