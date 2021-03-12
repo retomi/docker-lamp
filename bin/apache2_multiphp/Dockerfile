@@ -7,7 +7,7 @@ ENV INITRD No
 RUN apt-get -y update
 RUN apt-get -y full-upgrade
 RUN apt-get -y autoremove
-RUN apt-get -y install lsb-release tzdata apt-utils net-tools iproute2 netcat dnsutils curl iputils-ping iptables nmap tcpdump software-properties-common git wget vim htop zip unzip openssl nano graphicsmagick imagemagick ghostscript mysql-client iputils-ping locales sqlite3 ca-certificates sudo nodejs npm
+RUN apt-get -y install lsb-release tzdata apt-utils net-tools iproute2 netcat dnsutils curl iputils-ping iptables nmap tcpdump software-properties-common git wget vim htop zip unzip openssl nano graphicsmagick imagemagick ghostscript mysql-client iputils-ping locales sqlite3 ca-certificates sudo openssh-server zsh powerline fonts-powerline
 
 # apache
 RUN apt-get -y install apache2
@@ -40,28 +40,32 @@ RUN apt-get -y install php-uploadprogress php-mailparse php-imagick php-psr php-
 # RUN apt-get -y install php-xmlrpc
 # RUN apt-get -y install php-phalcon4
 
+# Add user for application (NO MACOS)
+RUN groupadd -g 1000 www
+RUN useradd -u 1000 -ms /bin/bash -g www www
+RUN usermod -aG sudo www
+
+RUN apt-get update
+RUN apt-get -y install openssh-server
+RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+RUN sudo apt-get install -y nodejs
+
 # Add composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php && \
     php -r "unlink('composer-setup.php');" && \
     mv composer.phar /usr/local/bin/composer
 
-# Add user for application (NO MACOS)
-RUN groupadd -g 1000 www
-RUN useradd -u 1000 -ms /bin/bash -g www www
-
-RUN apt-get update
-RUN apt-get -y install openssh-server
-RUN apt-get -y install curl
-RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-RUN sudo apt-get install -y nodejs
+USER www
+RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
 
 # clean up
+USER root
 RUN apt-get -y autoclean && apt-get -y autoremove
 RUN apt-get -y purge $(dpkg --get-selections | grep deinstall | sed s/deinstall//g)
 RUN rm -rf /var/lib/apt/lists/*
 
-EXPOSE 80 443
+EXPOSE 22 80 443
 
 ADD start.sh /
 RUN chmod +x /start.sh

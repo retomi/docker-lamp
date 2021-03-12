@@ -17,12 +17,13 @@ sed -i 's/export APACHE_RUN_USER=www-data/export APACHE_RUN_USER=www/g' /etc/apa
 sudo echo "www:www" | chpasswd
 sudo npm install --global gulp-cli
 echo 'alias ll="ls -la --color"' >> /home/www/.bashrc
+cp /home/www/.oh-my-zsh/templates/zshrc.zsh-template /home/www/.zshrc
+echo 'alias ll="ls -la --color"' >> /home/www/.zshrc
 sudo -H sh -c "git config --global credential.helper store;
 cat > /root/.git-credentials <<EOF
 http://USER:PASSWORD@gitlab.XXX.XXX
 https://USER:PASSWORD@gitlab.XXX.XXX
 EOF
 "
-#sh -c "echo 'alias ll=\"ls -la --color -I .DS_Store\"' >> /var/www/.bashrc"
-#sh -c "chown www:www /var/www/.bashrc"
+sudo sed -i 's/www:x:1000:1000::\/home\/www:\/bin\/bash/www:x:1000:1000::\/home\/www:\/bin\/zsh/g' /etc/passwd
 tail -f /dev/null
