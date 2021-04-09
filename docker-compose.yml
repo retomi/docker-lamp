@@ -14,10 +14,11 @@ services:
     links:
       - mariadb-10.4.12
     volumes:
+      - sources:/var/www/html
+      #- "../:/var/www/html:delegated"
       - ./config/.root_history:/root/.bash_history # file should exist before mounting
       - ./config/.www_history:/home/www/.bash_history # file should exist before mounting
       - ./config/.zsh_history:/home/www/.zsh_history # file should exist before mounting
-      - "../:/var/www/html:delegated"
       - ./config/php-8.0/php-apache.ini:/etc/php/8.0/apache2/php.ini
       - ./config/php-8.0/php-cli.ini:/etc/php/8.0/cli/php.ini
       - ./config/php-8.0/php-fpm.ini:/etc/php/8.0/fpm/php.ini
@@ -50,3 +51,6 @@ services:
     user: mysql
     environment:
       MYSQL_ROOT_PASSWORD: www
+
+volumes:
+  sources:
