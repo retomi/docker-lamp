@@ -19,5 +19,5 @@ sudo chmod o+w data
 Enable shared folder
 ```bash
 cd docker-lamp
-./bin/build.sh
+./bin/start.sh
 ```
