@@ -46,6 +46,7 @@ RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 RUN usermod -aG sudo www
 RUN echo "www:www" | chpasswd
+RUN chown -R "www:www" /var/www/html
 
 RUN sed -i 's/user = www-data/user = www/g' /etc/php/5.6/fpm/pool.d/www.conf \
     && sed -i 's/user = www-data/user = www/g' /etc/php/7.2/fpm/pool.d/www.conf \
