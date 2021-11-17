@@ -31,6 +31,7 @@ services:
       - ./config/php-5.6/php-fpm.ini:/etc/php/5.6/fpm/php.ini
       - ./config/vhosts:/etc/apache2/sites-enabled
       - ./config/hosts:/etc/hosts
+      - ./config/.zshrc:/home/www/.zshrc
       - ./logs/apache2:/var/log/apache2
       - ./logs/php:/var/log/php
 
