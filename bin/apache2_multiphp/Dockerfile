@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV INITRD No
@@ -12,6 +12,10 @@ RUN apt-get -y update \
         vim htop zip unzip openssl nano graphicsmagick imagemagick ghostscript \
         mysql-client iputils-ping locales sqlite3 ca-certificates sudo openssh-server \
         zsh powerline fonts-powerline openssh-server
+
+# locale
+RUN locale-gen "it_IT.UTF-8"
+RUN update-locale LANG=it_IT.UTF-8
 
 # apache
 RUN apt-get -y update \
@@ -39,7 +43,13 @@ RUN apt-get -y update \
     && apt-get -y install php-uploadprogress php-mailparse php-imagick php-psr php-memcached
 # RUN apt-get -y install php-xdebug
 # RUN apt-get -y install php-xmlrpc
-# RUN apt-get -y install php-phalcon4
+
+RUN sudo apt-get -y install gcc libpcre3-dev software-properties-common
+
+#RUN curl -s "https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh" | sudo bash
+#RUN apt-get -y install php7.4-phalcon
+#RUN a2enmod proxy_fcgi setenvif
+#RUN a2enconf php7.4-fpm
 
 # Add user for application (NO MACOS)
 RUN groupadd -g 1000 www
