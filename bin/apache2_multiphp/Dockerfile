@@ -65,9 +65,7 @@ RUN sed -i 's/user = www-data/user = www/g' /etc/php/5.6/fpm/pool.d/www.conf \
     && sed -i 's/;catch_workers_output = yes/catch_workers_output = yes/g' /etc/php/5.6/fpm/pool.d/www.conf \
     && sed -i 's/;catch_workers_output = yes/catch_workers_output = yes/g' /etc/php/7.2/fpm/pool.d/www.conf \
     && sed -i 's/;catch_workers_output = yes/catch_workers_output = yes/g' /etc/php/7.4/fpm/pool.d/www.conf \
-    && sed -i 's/;catch_workers_output = yes/catch_workers_output = yes/g' /etc/php/8.0/fpm/pool.d/www.conf \
-    && sed -i 's/export APACHE_RUN_USER=www-data/export APACHE_RUN_USER=www/g' /etc/apache2/envvars
-
+    && sed -i 's/;catch_workers_output = yes/catch_workers_output = yes/g' /etc/php/8.0/fpm/pool.d/www.conf
 
 RUN apt-get -y update \
     && curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - \
