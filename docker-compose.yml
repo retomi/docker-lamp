@@ -21,15 +21,19 @@ services:
       - ./config/php-8.0/php-apache.ini:/etc/php/8.0/apache2/php.ini
       - ./config/php-8.0/php-cli.ini:/etc/php/8.0/cli/php.ini
       - ./config/php-8.0/php-fpm.ini:/etc/php/8.0/fpm/php.ini
+      - ./config/php-8.0/www.conf:/etc/php/8.0/fpm/pool.d/www.conf
       - ./config/php-7.4/php-apache.ini:/etc/php/7.4/apache2/php.ini
       - ./config/php-7.4/php-cli.ini:/etc/php/7.4/cli/php.ini
       - ./config/php-7.4/php-fpm.ini:/etc/php/7.4/fpm/php.ini
+      - ./config/php-7.4/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
       - ./config/php-7.2/php-apache.ini:/etc/php/7.2/apache2/php.ini
       - ./config/php-7.2/php-cli.ini:/etc/php/7.2/cli/php.ini
       - ./config/php-7.2/php-fpm.ini:/etc/php/7.2/fpm/php.ini
+      - ./config/php-7.2/www.conf:/etc/php/7.2/fpm/pool.d/www.conf
       - ./config/php-5.6/php-apache.ini:/etc/php/5.6/apache2/php.ini
       - ./config/php-5.6/php-cli.ini:/etc/php/5.6/cli/php.ini
       - ./config/php-5.6/php-fpm.ini:/etc/php/5.6/fpm/php.ini
+      - ./config/php-5.6/www.conf:/etc/php/5.6/fpm/pool.d/www.conf
       - ./config/vhosts:/etc/apache2/sites-enabled
       - ./config/hosts:/etc/hosts
       - ./config/.zshrc:/home/www/.zshrc
