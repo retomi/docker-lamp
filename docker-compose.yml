@@ -16,8 +16,12 @@ services:
       - mariadb-10.4.12
     volumes:
       - sources:/var/www/html
-      #- "../:/var/www/html:delegated"
+      - "../:/media:delegated"
       - ./history:/history
+      - ./config/php-8.1/php-apache.ini:/etc/php/8.0/apache2/php.ini
+      - ./config/php-8.1/php-cli.ini:/etc/php/8.0/cli/php.ini
+      - ./config/php-8.1/php-fpm.ini:/etc/php/8.0/fpm/php.ini
+      - ./config/php-8.1/www.conf:/etc/php/8.0/fpm/pool.d/www.conf
       - ./config/php-8.0/php-apache.ini:/etc/php/8.0/apache2/php.ini
       - ./config/php-8.0/php-cli.ini:/etc/php/8.0/cli/php.ini
       - ./config/php-8.0/php-fpm.ini:/etc/php/8.0/fpm/php.ini
