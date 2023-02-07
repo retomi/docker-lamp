@@ -10,7 +10,7 @@ RUN apt-get -y update \
         lsb-release tzdata apt-utils net-tools iproute2 netcat dnsutils curl \
         iputils-ping iptables nmap tcpdump software-properties-common git wget \
         vim htop zip unzip openssl nano graphicsmagick imagemagick ghostscript \
-        mysql-client iputils-ping locales sqlite3 ca-certificates sudo openssh-server \
+        mysql-client postgresql-client iputils-ping locales sqlite3 ca-certificates sudo openssh-server \
         zsh powerline fonts-powerline openssh-server
 
 # locale
@@ -52,6 +52,11 @@ RUN sudo apt-get -y install gcc libpcre3-dev software-properties-common
 #RUN apt-get -y install php7.4-phalcon
 #RUN a2enmod proxy_fcgi setenvif
 #RUN a2enconf php7.4-fpm
+
+# install Cron
+RUN apt-get update
+RUN apt-get -y install cron
+CMD ["crond", "-f", "-d", "8"]
 
 # python3
 RUN apt-get -y install python3-pip
