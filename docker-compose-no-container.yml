@@ -15,7 +15,7 @@ services:
     links:
       - mariadb
     volumes:
-      - sources:/var/www/html
+      - ./data-html:/var/www/html
       - "../:/media:delegated"
       - ./history:/history
       - ./config/php-8.1/php-apache.ini:/etc/php/8.1/apache2/php.ini
@@ -63,9 +63,8 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - data:/var/lib/mysql
+      - ./data-mariadb:/var/lib/mysql
       - ./config/mysql/docker.cnf:/etc/mysql/mariadb.conf.d/docker.cnf
-      - ./logs/mysql:/var/log/mysql
     user: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=www
@@ -80,12 +79,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - ./data-postgres:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: www
 
-volumes:
-  sources:
-  data:
-  postgres-data:
