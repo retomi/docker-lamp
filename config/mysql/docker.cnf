@@ -12,3 +12,4 @@ innodb_strict_mode=0
 performance_schema=ON
 query_cache_size=0
 query_cache_type=0
+log_error=/var/log/mysql/mariadb.err
