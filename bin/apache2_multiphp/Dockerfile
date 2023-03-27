@@ -85,6 +85,7 @@ RUN apt-get -y update \
     && npm install --global bower gulp-cli
 
 # Add composer
+RUN update-alternatives --set php /usr/bin/php8.1
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php && \
     php -r "unlink('composer-setup.php');" && \
@@ -94,13 +95,11 @@ RUN mkdir /history && chmod -R 777 /history
 RUN touch /history/.root_history && ln -s /history/.root_history /root/.bash_history
 
 USER www
-
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 RUN git config --global oh-my-zsh.hide-dirty 1
-
 RUN touch /history/.www_history && ln -s /history/.www_history /home/www/.bash_history
 RUN touch /history/.zsh_history && ln -s /history/.zsh_history /home/www/.zsh_history
-
+RUN composer global require laravel/installer
 
 # clean up
 USER root
