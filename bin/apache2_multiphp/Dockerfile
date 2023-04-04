@@ -68,6 +68,7 @@ RUN usermod -aG sudo www
 RUN echo "www:www" | chpasswd
 RUN chown -R "www:www" /var/www/html
 
+RUN sed -i 's/export APACHE_RUN_USER=www-data/export APACHE_RUN_USER=www/g' /etc/apache2/envvars
 #RUN sed -i 's/user = www-data/user = www/g' /etc/php/5.6/fpm/pool.d/www.conf \
 #    && sed -i 's/user = www-data/user = www/g' /etc/php/7.2/fpm/pool.d/www.conf \
 #    && sed -i 's/user = www-data/user = www/g' /etc/php/7.4/fpm/pool.d/www.conf \
