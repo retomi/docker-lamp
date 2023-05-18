@@ -22,11 +22,9 @@ RUN add-apt-repository ppa:ondrej/apache2 -y
 RUN apt-get -y update \
     && apt-get -y install apache2 \
     && apt-get -y install libapache2-mod-fcgid
-RUN a2enmod rewrite actions alias headers
 RUN echo "ServerName localhost" | tee /etc/apache2/conf-available/servername.conf
-RUN echo "Listen 8080" >> /etc/apache2/ports.conf
 RUN a2enconf servername
-RUN a2enmod dav dav_fs proxy_fcgi
+RUN a2enmod rewrite actions alias headers dav dav_fs proxy_fcgi ssl deflate
 
 # timezone
 RUN ln -fs /usr/share/zoneinfo/Europe/Rome /etc/localtime && dpkg-reconfigure -f noninteractive tzdata
@@ -46,12 +44,15 @@ RUN apt-get -y update \
 # RUN apt-get -y install php-xdebug
 # RUN apt-get -y install php-xmlrpc
 
+RUN a2dismod php5.6
+RUN a2dismod mpm_prefork
+RUN a2enmod mpm_event
+RUN a2enmod http2
+
 RUN sudo apt-get -y install gcc libpcre3-dev software-properties-common
 
 #RUN curl -s "https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh" | sudo bash
 #RUN apt-get -y install php7.4-phalcon
-#RUN a2enmod proxy_fcgi setenvif
-#RUN a2enconf php7.4-fpm
 
 # install Cron
 RUN apt-get update
@@ -68,6 +69,9 @@ RUN usermod -aG sudo www
 RUN echo "www:www" | chpasswd
 RUN chown -R "www:www" /var/www/html
 
+RUN sed -i 's/Timeout 300/Timeout 200/g' /etc/apache2/apache2.conf
+RUN sed -i 's/MaxKeepAliveRequests 100/MaxKeepAliveRequests 500/g' /etc/apache2/apache2.conf
+RUN sed -i 's/KeepAliveTimeout 5/KeepAliveTimeout 3/g' /etc/apache2/apache2.conf
 RUN sed -i 's/export APACHE_RUN_USER=www-data/export APACHE_RUN_USER=www/g' /etc/apache2/envvars
 #RUN sed -i 's/user = www-data/user = www/g' /etc/php/5.6/fpm/pool.d/www.conf \
 #    && sed -i 's/user = www-data/user = www/g' /etc/php/7.2/fpm/pool.d/www.conf \
