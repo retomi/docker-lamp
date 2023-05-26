@@ -9,9 +9,8 @@ services:
     restart: always
     ports:
       - "8022:22"
-      - "8080:80"
-      - "8081:8081"
-      - "8443:443"
+      - "80:80"
+      - "443:443"
     links:
       - mariadb
     volumes:
