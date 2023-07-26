@@ -68,6 +68,8 @@ RUN sed -i 's/Timeout 300/Timeout 200/g' /etc/apache2/apache2.conf
 RUN sed -i 's/MaxKeepAliveRequests 100/MaxKeepAliveRequests 500/g' /etc/apache2/apache2.conf
 RUN sed -i 's/KeepAliveTimeout 5/KeepAliveTimeout 3/g' /etc/apache2/apache2.conf
 RUN sed -i 's/export APACHE_RUN_USER=www-data/export APACHE_RUN_USER=www/g' /etc/apache2/envvars
+RUN echo 'MaxRequestWorkers 5' >> /etc/apache2/apache2.conf
+RUN echo 'ThreadsPerChild 5' >> /etc/apache2/apache2.conf
 
 RUN apt-get -y update \
     && curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - \
@@ -89,6 +91,7 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
 RUN git config --global oh-my-zsh.hide-dirty 1
 RUN touch /history/.www_history && ln -s /history/.www_history /home/www/.bash_history
 RUN touch /history/.zsh_history && ln -s /history/.zsh_history /home/www/.zsh_history
+
 RUN composer global require laravel/installer
 
 # clean up
@@ -101,5 +104,4 @@ EXPOSE 22 80 443
 
 ADD start.sh /
 RUN chmod +x /start.sh
-
 CMD ["/start.sh"]
