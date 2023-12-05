@@ -6,7 +6,6 @@ services:
       context: ./bin/apache2_multiphp
       dockerfile: Dockerfile
     container_name: apache2-multiphp
-    restart: always
     ports:
       - "8022:22"
       - "80:80"
@@ -14,9 +13,13 @@ services:
     links:
       - mariadb
     volumes:
-      - ./data-html:/var/www/html
+      - ./data-html:/var/www/html:delegated
       - "../:/media:delegated"
-      - ./history:/history
+
+      - ./history/root_history.txt:/root/.bash_history
+      - ./history/bash_history.txt:/homw/www/.bash_history
+      - ./history/zsh_history.txt:/homw/www/.zsh_history
+
       - ./config/php-8.1/php-apache.ini:/etc/php/8.1/apache2/php.ini
       - ./config/php-8.1/php-cli.ini:/etc/php/8.1/cli/php.ini
       - ./config/php-8.1/php-fpm.ini:/etc/php/8.1/fpm/php.ini
@@ -58,7 +61,6 @@ services:
       context: "./bin/mariadb"
       dockerfile: Dockerfile
     container_name: mariadb
-    restart: always
     ports:
       - "3306:3306"
     volumes:
@@ -66,20 +68,20 @@ services:
       - ./config/mysql/docker.cnf:/etc/mysql/mariadb.conf.d/docker.cnf
     user: mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=www
-      - TZ=Europe/Rome
+      - "TZ=Europe/Rome"
+      - "MYSQL_ROOT_PASSWORD=www"
 
-  postgres:
-    build:
-      context: "./bin/postgres"
-      dockerfile: Dockerfile
-    container_name: postgres
-    restart: always
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./data-postgres:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: www
+  # postgres:
+  #   build:
+  #     context: "./bin/postgres"
+  #     dockerfile: Dockerfile
+  #   container_name: postgres
+  #   restart: always
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - ./data-postgres:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: www
 
