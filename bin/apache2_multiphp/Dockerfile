@@ -34,6 +34,7 @@ RUN a2enmod rewrite actions alias headers dav dav_fs proxy_fcgi ssl deflate
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 RUN usermod -aG sudo www
+RUN usermod -a -G www-data www
 RUN echo "www:www" | chpasswd
 
 RUN sed -i 's/Timeout 300/Timeout 200/g' /etc/apache2/apache2.conf
