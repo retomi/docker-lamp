@@ -1,5 +1,5 @@
 #!/bin/bash
-chown -R "www:www" /var/www/html
+chown "www:www" /var/www/html
 
 su - www -c 'composer global require laravel/installer'
 su - www -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended'
